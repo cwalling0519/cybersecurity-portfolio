@@ -12,7 +12,7 @@ Account: Global admin with Security admin rights
 Anti-phishing policy – attempted configuration
 Signed in to https://security.microsoft.com and confirmed access to the Microsoft Defender home dashboard.
 
-Screenshot: lab02-defender-portal-home.jpg
+Screenshot: lab02-defender-portal-home.png
 
 Navigated to Email & collaboration → Policies & rules → Threat policies → Anti-phishing and reviewed the existing Office365 AntiPhish Default (Default) policy.
 
