@@ -6,133 +6,74 @@ Environment
 Tenant: magnoliaridgecybersecurity.onmicrosoft.com
 
 Portal: Microsoft Defender portal at https://security.microsoft.com
-​
 
-Admin account: Global admin with Security admin rights
+Account: Global admin with Security admin rights
 
-Attempted anti-phishing policy configuration
-Signed in to https://security.microsoft.com and opened Email & collaboration → Policies & rules → Threat policies → Anti-phishing.
-​
+Anti-phishing policy – attempted configuration
+Signed in to https://security.microsoft.com and confirmed access to the Microsoft Defender home dashboard.
 
-Took a screenshot of the Anti‑phishing policies list showing built‑in/default policies and my admin context.
+Screenshot: lab02-defender-portal-home.jpg
 
-Clicked Create policy → Anti-phishing to create a new policy named “Magnolia Ridge – Default Anti-Phishing”.
+Navigated to Email & collaboration → Policies & rules → Threat policies → Anti-phishing and reviewed the existing Office365 AntiPhish Default (Default) policy.
 
-Scope: Added the tenant domain magnoliaridgecybersecurity.onmicrosoft.com under Include these users, groups, and domains → Domains so the policy would apply to all mailboxes in this lab.
+Screenshot: lab02-anti-phishing-policy-list.jpg
 
-Took a screenshot of the Users, groups, and domains page showing the included domain.
+Opened the default anti‑phishing policy and went to the Phishing threshold & protection page to increase protection:
 
-On Phishing threshold & protection:
+Set Phishing email threshold to 2 – Aggressive.
 
-Set Phishing email threshold to level 2 – Aggressive to increase sensitivity over the default.
+Left Spoof intelligence On.
 
-Left Spoof intelligence turned On.
+Enabled User impersonation protection and added the admin account as a protected user.
 
-Enabled User impersonation protection and added my admin account as a protected user.
+Left Domain impersonation protection off for this small lab tenant.
 
-Left Domain impersonation off for this tiny lab.
+Screenshot: lab02-anti-phishing-threshold-impersonation.jpg
 
-Took a screenshot of this page with the slider, spoof intelligence, and user impersonation settings.
+Attempted to save the updated anti‑phishing policy. The portal repeatedly returned a Client Error indicating the operation could not be completed, even when retrying with minimal changes. This suggests a backend issue in the tenant’s Defender/Exchange policy infrastructure rather than a configuration mistake.
 
-On the Actions page, I attempted to harden message handling:
+Screenshot: lab02-anti-phishing-client-error.jpg
 
-Set If a message is detected as user impersonation → Quarantine the message.
-
-Left Honor DMARC record policy when the message is detected as spoof enabled.
-
-Ensured If the message is detected as spoof and DMARC policy is p=quarantine → Quarantine the message, and p=reject → Reject the message.
-​
-
-Changed If the message is detected as spoof by spoof intelligence → Quarantine the message instead of moving to Junk.
-
-Enabled safety tips such as first contact and user impersonation safety tips where available.
-
-Took a screenshot of the Actions page showing these intended settings.
-
-When attempting to save/finish the new policy, the portal repeatedly returned:
-
-“Client Error – An error occurred when creating the policy. Please review your settings and try again.”
-
-Diagnostic info included Version:1.0.2774.1, Environment:SCUPROD, and backend identifiers.
-
-I confirmed settings were valid and retried several times with minimal changes but received the same error, which aligns with reported issues in some newer tenants where Defender threat policies cannot be created due to backend faults.
-
-Took a screenshot of the error dialog for documentation.
-
-Organizational setup attempt
-The portal prompted “Complete organizational setup” while working with threat policies. I chose Yes to try to unblock policy creation.
-
-This opened the organizational / Defender setup wizard intended to complete initial configuration for the tenant.
-
-Took a screenshot of the first page of this setup wizard.
-
-During that setup process, the portal displayed another backend error:
-
-“Client Error – Exception of type 'Microsoft.Exchange.Management.PSDirectInvoke.DirectInvokeCmdletExecutionException' was thrown.”
-
-This indicated the setup could not complete successfully for this tenant at this time.
-
-Took a screenshot of this Client Error from the organizational setup.
-
-After closing the error and refreshing the Defender portal, I confirmed that Anti‑phishing policies still could not be created or edited without hitting the same Client Error message.
-
-Attempted anti-spam policy configuration
-Navigated to Email & collaboration → Policies & rules → Threat policies → Anti-spam.
-​
-
-Observed three default policies:
+Anti-spam policies – attempted configuration
+Navigated to Email & collaboration → Policies & rules → Threat policies → Anti-spam and reviewed the default policies:
 
 Anti-spam inbound policy (Default)
 
 Connection filter policy (Default)
 
 Anti-spam outbound policy (Default)
-
 All showed Status: Always on and Priority: Lowest.
 
-Took a screenshot of this Anti-spam policies overview page.
+Screenshot: lab02-anti-spam-policies-overview.jpg
 
-Opened Anti-spam inbound policy (Default) to adjust spam handling:
+Opened Anti-spam inbound policy (Default) and attempted to harden inbound spam handling in the Actions (or Spam/Bulk actions) section by configuring:
 
-Intended changes in the Spam and bulk actions section:
+High confidence spam → Quarantine message.
 
-Set High confidence spam → Quarantine the message.
+Phishing → Quarantine message.
 
-Set any Phishing category (if present) → Quarantine the message.
+Regular Spam left as Move message to Junk Email folder.
+These changes were intended to ensure high‑risk messages are quarantined instead of delivered to user mailboxes.
 
-Leave normal Spam as move to Junk. These follow Microsoft’s recommended stronger baseline for inbound spam and phishing.
+Screenshot: lab02-anti-spam-inbound-settings.jpg
 
-Took a screenshot of the settings page showing the intended dropdown changes.
+When saving the updated inbound spam policy, the portal again displayed a Client Error stating that the operation could not be completed and to try again later. As with the anti‑phishing policy, the error prevented any changes from being applied.
 
-When attempting to save the inbound anti-spam policy, the portal again returned:
-
-“Client Error – An error occurred when updating the policy. Please try it later.”
-
-This matched the same pattern as the anti-phishing policy failures, indicating a broader Defender policy backend issue rather than a configuration mistake.
-
-Took a screenshot of the anti-spam policy editor with the error visible.
-
-Returned to the Anti-spam policies list to confirm:
-
-All default policies remained in their original state (no changes applied).
-
-Took a final screenshot of the list with policies still Always on but unmodified.
+Screenshot: lab02-anti-spam-client-error.jpg
 
 Findings and observations
-The lab objective was to raise protection by:
+Intended changes for this lab were to:
 
-Enabling a stricter anti‑phishing policy (threshold 2, spoof intelligence on, user impersonation protection, and quarantine actions).
+Increase anti‑phishing sensitivity (threshold 2), keep spoof intelligence enabled, and protect the admin account with user impersonation settings.
 
-Tightening inbound anti‑spam handling so high‑confidence spam and phishing are quarantined.
+Quarantine high‑confidence spam and phishing messages instead of sending them to Junk, while leaving normal spam as Junk.
 
-In practice, the Microsoft Defender portal in this tenant would not allow any creation or modification of anti‑phishing or anti‑spam policies. Multiple attempts (including running organizational setup) resulted in consistent Client Error messages tied to backend cmdlet execution in Exchange Online / Defender.
+In practice, the tenant’s Defender environment blocked all attempts to create or update email threat policies. Both anti‑phishing and anti‑spam policy changes failed with Client Error messages during save operations, even after confirming valid settings and retrying.
 
-This behavior matches documented issues where new or partially configured tenants experience failures when Defender tries to call underlying Exchange Online cmdlets to create or update threat policies.
+This lab still demonstrates:
 
-Even though final policy changes could not be applied, the lab still demonstrated:
+How to locate and attempt to configure anti‑phishing and anti‑spam policies in Microsoft Defender.
 
-How to navigate to and attempt configuration of Anti‑phishing and Anti‑spam policies in the Microsoft Defender portal.
+The specific settings a security analyst would apply to harden a small tenant’s email protections.
 
-How to select target domains / users, adjust phishing thresholds, enable spoof and impersonation protection, and choose quarantine vs. junk actions.
-
-How to document platform limitations and errors as part of a security assessment, rather than silently ignoring them.
+How to document platform‑level limitations and errors as part of a security assessment, including capturing evidence screenshots and describing the impact on the organization’s ability to fully enforce best‑practice controls.
