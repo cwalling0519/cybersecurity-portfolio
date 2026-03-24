@@ -16,7 +16,7 @@ Screenshot: lab02-defender-portal-home.jpg
 
 Navigated to Email & collaboration → Policies & rules → Threat policies → Anti-phishing and reviewed the existing Office365 AntiPhish Default (Default) policy.
 
-Screenshot: lab02-anti-phishing-policy-list.jpg
+Screenshot: lab02-anti-phishing-policy-list.png
 
 Opened the default anti‑phishing policy and went to the Phishing threshold & protection page to increase protection:
 
@@ -28,11 +28,11 @@ Enabled User impersonation protection and added the admin account as a protected
 
 Left Domain impersonation protection off for this small lab tenant.
 
-Screenshot: lab02-anti-phishing-threshold-impersonation.jpg
+Screenshot: lab02-anti-phishing-threshold-impersonation.png
 
 Attempted to save the updated anti‑phishing policy. The portal repeatedly returned a Client Error indicating the operation could not be completed, even when retrying with minimal changes. This suggests a backend issue in the tenant’s Defender/Exchange policy infrastructure rather than a configuration mistake.
 
-Screenshot: lab02-anti-phishing-client-error.jpg
+Screenshot: lab02-anti-phishing-client-error.png
 
 Anti-spam policies – attempted configuration
 Navigated to Email & collaboration → Policies & rules → Threat policies → Anti-spam and reviewed the default policies:
@@ -44,7 +44,7 @@ Connection filter policy (Default)
 Anti-spam outbound policy (Default)
 All showed Status: Always on and Priority: Lowest.
 
-Screenshot: lab02-anti-spam-policies-overview.jpg
+Screenshot: lab02-anti-spam-policies-overview.png
 
 Opened Anti-spam inbound policy (Default) and attempted to harden inbound spam handling in the Actions (or Spam/Bulk actions) section by configuring:
 
@@ -55,11 +55,11 @@ Phishing → Quarantine message.
 Regular Spam left as Move message to Junk Email folder.
 These changes were intended to ensure high‑risk messages are quarantined instead of delivered to user mailboxes.
 
-Screenshot: lab02-anti-spam-inbound-settings.jpg
+Screenshot: lab02-anti-spam-inbound-settings.png
 
 When saving the updated inbound spam policy, the portal again displayed a Client Error stating that the operation could not be completed and to try again later. As with the anti‑phishing policy, the error prevented any changes from being applied.
 
-Screenshot: lab02-anti-spam-client-error.jpg
+Screenshot: lab02-anti-spam-client-error.png
 
 Findings and observations
 Intended changes for this lab were to:
