@@ -1,6 +1,6 @@
 # Cybersecurity Portfolio
 
-Aspiring Cloud Security Engineer focused on Microsoft 365 and cloud hardening  
+Aspiring Cloud Security Engineer  
 CompTIA A+, Network+, Security+, ITIL 4 Foundation
 
 ## Projects
