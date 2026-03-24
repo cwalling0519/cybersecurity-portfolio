@@ -46,13 +46,13 @@ Endpoints, on‑prem network equipment, and non‑Microsoft SaaS applications ar
 
 ---
 
-## Tools and Portals Used
+## Tools and Technologies Used
 
-- Microsoft 365 admin center  
-- Entra ID (Azure AD) portal  
-- Exchange admin center  
-- Microsoft Defender portal (where applicable)  
-- Built‑in security and compliance features available in Business‑class licenses
+- Microsoft 365 admin center – tenant overview, user and license management, security defaults, and basic security settings.
+- Entra ID (Azure AD) portal – identity configuration, MFA, conditional access, and sign‑in/audit logs.
+- Exchange admin center – mail flow, anti‑spam and anti‑phishing policies, and email authentication settings.
+- Microsoft Defender portal (where available) – email threat policies, alerts, and security insights for Exchange Online.
+- Built‑in Microsoft 365 Business security and compliance features – using what a small business is likely to have by default, without premium add‑ons.
 
 ---
 
